@@ -3,12 +3,16 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS_INFO } from "../../graphql/queries";
 // mui
-import { Avatar, Divider, Grid2, Typography } from "@mui/material";
+import { Avatar, Button, Divider, Grid2, Typography } from "@mui/material";
+// router
+import { Link } from "react-router-dom";
+// components
+import Loader from "../shared/Loader";
 
 function Authors() {
   // api data
   const { loading, data, error } = useQuery(GET_AUTHORS_INFO);
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loader />;
 
   if (error) return <h1>Something went wrong</h1>;
   const { authors } = data;
@@ -23,19 +27,26 @@ function Authors() {
       {authors.map((author, index) => (
         <React.Fragment key={author.id}>
           <Grid2 size={12} padding={2}>
-            <a
-              href={`/authors/${author.slug}`}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-              }}
-            >
-              <Avatar src={author.avatar.url} sx={{ marginRight: 2 }} />
-              <Typography component="p" variant="p" color="text.secondary">
-                {author.name}
-              </Typography>
-            </a>
+            <Button variant="text" fullWidth sx={{ justifyContent: "start" }}>
+              <Link
+                to={`/authors/${author.slug}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                }}
+              >
+                <Avatar src={author.avatar.url} sx={{ marginRight: 2 }} />
+                <Typography
+                  component="p"
+                  variant="p"
+                  color="text.secondary"
+                  fontWeight={700}
+                >
+                  {author.name}
+                </Typography>
+              </Link>
+            </Button>
           </Grid2>
           {index !== authors.length - 1 && (
             <Grid2 size={12}>
