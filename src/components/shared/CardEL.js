@@ -53,10 +53,10 @@ function CardEL({ post: { title, slug, author, coverPhoto, id } }) {
       </CardContent>
       <Divider variant="middle" sx={{ margin: "10px" }} />
       <CardActions>
-        <Link
+        {/* <Link
           to={`/blogs/${slug}`}
           style={{ textDecoration: "none", width: "100%" }}
-        >
+        > */}
           <Button
             variant="outlined"
             size="small"
@@ -64,7 +64,7 @@ function CardEL({ post: { title, slug, author, coverPhoto, id } }) {
           >
             Read more...
           </Button>
-        </Link>
+        {/* </Link> */}
       </CardActions>
     </Card>
   );
