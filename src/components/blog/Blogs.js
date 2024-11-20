@@ -1,14 +1,25 @@
+// graphql
 import { useQuery } from "@apollo/client";
 import { GET_BLOGS_INFO } from "../../graphql/queries";
+// mui
+import { Grid2 } from "@mui/material";
+import CardEL from "../shared/CardEL";
 
 function Blogs() {
   const { loading, data, error } = useQuery(GET_BLOGS_INFO);
 
   if (loading) return <h1>Loading...</h1>;
-  
+
   if (error) return <h1>Something went wrong</h1>;
-  console.log(data);
-  return <div></div>;
+  return (
+    <Grid2 container spacing={2}>
+      {data.posts.map((post) => (
+        <Grid2 key={post.id} size={{ xs: 12, sm: 6, lg: 4 }}>
+          <CardEL  post={post} />
+        </Grid2>
+      ))}
+    </Grid2>
+  );
 }
 
 export default Blogs;
