@@ -18,6 +18,8 @@ import {
 // icons
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import sanitize from "sanitize-html";
+import CommentForm from "../comment/CommentForm";
+import Comments from "../comment/Comments";
 
 function BlogPage() {
   const navigate = useNavigate();
@@ -34,6 +36,7 @@ function BlogPage() {
   return (
     <Container maxWidth="lg">
       <Grid2 container>
+        {/* header */}
         <Grid2 size={12} mt={9}>
           <IconButton onClick={() => navigate(-1)}>
             <ArrowBackRoundedIcon />
@@ -51,6 +54,7 @@ function BlogPage() {
             {data.post.title}
           </Typography>
         </Grid2>
+        {/* cover image */}
         <Grid2 size={12} mt={6}>
           <Box sx={{ width: "70%", margin: "0 auto" }}>
             <img
@@ -61,6 +65,7 @@ function BlogPage() {
             />
           </Box>
         </Grid2>
+        {/* author */}
         <Grid2 size={12}>
           <Stack direction="row" alignItems={"center"}>
             <Avatar
@@ -82,14 +87,24 @@ function BlogPage() {
             </Box>
           </Stack>
         </Grid2>
+        {/* content */}
         <Grid2 size={12} mt={5}>
-          <Box component={"div"} width="80%" margin={"auto"}
-          fontWeight={500}
-          lineHeight={1.5}
+          <Box
+            component={"div"}
+            width="80%"
+            margin={"auto"}
+            fontWeight={500}
+            lineHeight={1.5}
             dangerouslySetInnerHTML={{
               __html: sanitize(data.post.content.html),
             }}
           ></Box>
+        </Grid2>
+        <Grid2 size={12}>
+          <CommentForm slug={slug} />
+        </Grid2>
+        <Grid2 size={12}>
+          <Comments slug={slug} />
         </Grid2>
       </Grid2>
     </Container>
